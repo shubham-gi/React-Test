@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Home from './components/Home';
+import {useState} from 'react'
+import {BrowserRouter,Route,Routes} from 'react-router-dom'
+import Student from './components/Student';
 function App() {
+  const initalCredential={
+    username:"",
+    telephone:"",
+}
+const [credentials, setcredentials] = useState(initalCredential);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <BrowserRouter>
+        <Routes>
+           {/* Set credentials is passed to the Home component. When user visits the '/' route the value of credentials is initialised. */}
+          <Route exact path='/' element={<Home setcredentials={setcredentials} />}></Route>
+          <Route exact path='/student' element={<Student credentials={credentials}/>} ></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
